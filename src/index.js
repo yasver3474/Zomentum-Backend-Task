@@ -70,10 +70,41 @@ app.get('/user/:id',(req,res)=>{
         return res.send(500).send();
     })
 })
-// Resource Endpoint for Updating a Ticket Time
-app.patch('/tickets/:id',(req,res)=>{
+// Resource Endpoint for Updating a Ticket Time 
+app.patch('/tickets/:id',async (req,res)=>{
+
+    //The request body will have the new Ticket Time.
+    try{
+
+        const ticket = await Ticket.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true});
+        if(!ticket){
+            return res.status(404).send();
+        }
+        res.send(ticket);
+    } catch(error){
+        console.log(error);
+        res.status(400).send(error);
+
+    }
+
+
+});
+
+// Resource Endpoint for Deleting a particular a ticket
+app.delete('/tickets/:id',async (req,res)=>{
+
+    try{
+        const ticket = await Ticket.findByIdAndDelete(req.params.id);
+        if(!ticket){
+            return res.status(404).send();
+        }
+        return res.send(ticket);
+        
+    } catch(error){
+        res.status(500).send();
+    }
 
 })
 app.listen(port,()=>{
     console.log(`Server is up on port ${port}`);
-})
+});
