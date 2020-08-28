@@ -7,29 +7,48 @@ const port = process.env.PORT || 3000;
 // To convert the incoming request body to a JS object from JSON
 app.use(express.json());
 
-//Rescource endpoint for Creating A Ticket
-app.post('/tickets',(req,res)=>{
+//Rescource endpoint for Creating A Ticket + Checking if number of tickets less than 20 or not.
+app.post('/tickets',async (req,res)=>{
     // console.log(req.body);
     const ticket = new Ticket(req.body)
-    ticket.save().then(()=>{
+    Ticket.countDocuments({movieTime:ticket.movieTime},(error,count)=>{
+        if(error){
+            return res.status(500).send();
+        }
+        else{
+            if(count>=20){
+                return res.status(503).send('HouseFull');
+            }else{
+                ticket.save().then(()=>{
+                
+                    res.send(ticket);
+                    res.send('Created');
+            
+                }).catch((error)=>{
+                    res.status(400);
+                    res.send(error);
+                })
         
-        res.send(ticket);
-        res.send('Created');
+            }
+        }
+    });
 
-    }).catch((error)=>{
-        res.status(400);
-        res.send(error);
-    })
-})
+    
+});
 
 // Resource Enpoint for Viewing all the tickets for a particular time
 app.get('/tickets/:time',(req,res)=>{
 
     const time = req.params.time;
     Ticket.find({movieTime: new Date(time)}).then((tickets)=>{
-        return res.send(tickets);
+
+        if(!tickets){
+            return res.status(404).send();
+        }else{
+            return res.status(200).send(tickets);
+        }
     }).catch((error)=>{
-        return res.send(error);
+        return res.status(500).send(error);
     })
 
 });
