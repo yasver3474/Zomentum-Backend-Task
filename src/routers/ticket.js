@@ -1,6 +1,8 @@
 const express = require('express');
 const Ticket = require('../models/ticket');
 const router = new express.Router();
+
+
 //Rescource endpoint for Creating A Ticket + Checking if number of tickets less than 20 or not.
 router.post('/tickets',async (req,res)=>{
     // console.log(req.body);
