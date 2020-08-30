@@ -68,7 +68,11 @@ The following POSTMAN screenshot shows the successful working of this business c
 
 ### Business Case -6 : Expire the ticket after 8 hours of the movieTime 
 The following POSTMAN screenshot shows the successful working of this business case 
-![Tickets by Time](/images/userDetail.png)
+First Screenshot shows creation of a ticket that had time 8 hours less than the current time
+![TimeDelay](/images/deleteTicket.png)
+Second Screenshot shows the automatic deletion of the ticket as it was expired now\
+![Automatic Delete](/images/AutomaticallyDeleted.png)
+
 
 
 
