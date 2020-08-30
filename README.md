@@ -37,11 +37,38 @@ The mongoose.js file in the src/db connects to the database
 Express has been used to create establish a server and also to handle various client server calls.
 
 ### Business Case -1 : Booking a ticket 
-The follwing POSTMAN screenshot shows the sucessful ticket creation as well as the invalid ticket creation
+The follwing POSTMAN screenshots show the sucessful ticket creation as well as the invalid ticket creation
 
 #### Successful Ticket Creation 
-![Successful Ticket Creation](/images/vaildTicket.png)
+![Successful Ticket Creation](/images/validTicket.png)
 
 
 #### Unsuccessful Ticket Creation 
-![Unsuccessful Ticket Creation](/images/invaildTicket.png)
+![Unsuccessful Ticket Creation](/images/invalidTicket.png)
+
+
+### Business Case -2 : Update Ticket Time 
+The following POSTMAN screenshot shows successful working of this business case
+![Successfull Timing Upate](/images/updateTime.png)
+
+### Business Case -3 : View all the tickets for a particular time 
+The following POSTMAN screenshot shows the successful working of this business case 
+![Tickets by Time](/images/getTicketsByTime.png)
+
+
+### Business Case -4 : Delete all the tickets 
+The following POSTMAN screenshot shows the successful working of this business case 
+![Delete Ticket](/images/deleteTicket.png)
+
+
+### Business Case -5 : View user details associated with a particular ticket id 
+The following POSTMAN screenshot shows the successful working of this business case 
+![Tickets by Time](/images/userDetail.png)
+
+
+### Business Case -6 : Expire the ticket after 8 hours of the movieTime 
+The following POSTMAN screenshot shows the successful working of this business case 
+![Tickets by Time](/images/userDetail.png)
+
+
+

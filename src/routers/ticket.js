@@ -4,21 +4,24 @@ const router = new express.Router();
 
 
 //Rescource endpoint for Creating A Ticket + Checking if number of tickets less than 20 or not.
-router.post('/tickets',async (req,res)=>{
+router.post('/tickets', (req,res)=>{
     // console.log(req.body);
     const ticket = new Ticket(req.body)
+    // Counting the documents that have the movieTime as the req.body user time
     Ticket.countDocuments({movieTime:ticket.movieTime},(error,count)=>{
         if(error){
             return res.status(500).send();
         }
         else{
             if(count>=20){
+                // If count is greater than 20 then not adding the document to the database
                 return res.status(503).send('HouseFull');
             }else{
+                // else adding the document to the databse
                 ticket.save().then(()=>{
                 
                     res.send(ticket);
-                    res.send('Created');
+                    // res.send('Created');
             
                 }).catch((error)=>{
                     res.status(400);
@@ -35,7 +38,9 @@ router.post('/tickets',async (req,res)=>{
 // Resource Enpoint for Viewing all the tickets for a particular time
 router.get('/tickets/:time',(req,res)=>{
 
+    // Getting the time for the query from the req parameters
     const time = req.params.time;
+    // Finding the documents with 
     Ticket.find({movieTime: new Date(time)}).then((tickets)=>{
 
         if(!tickets){

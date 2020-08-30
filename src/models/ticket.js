@@ -25,6 +25,6 @@ const ticketSchema = mongoose.Schema({
 });
 // This index will expire the ticket document after 8 hours of the given movie time
 // The delete routine that runs after every 60s will delete the expired documents
-ticketSchema.index({movieTime:1},{expireAfterSeconds:50});
+ticketSchema.index({movieTime: 1},{expireAfterSeconds: 10});
 const Ticket = mongoose.model('Ticket',ticketSchema);
 module.exports = Ticket;
